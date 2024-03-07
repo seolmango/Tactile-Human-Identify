@@ -3,7 +3,7 @@ import numpy as np
 from tqdm import tqdm
 
 DataLoader = data_loader.DataLoader(
-    '../230823_walkingData',
+    '230823_walkingData',
     {
         'cyh': ['1', '2'],
         'ksh': ['1', '2'],
@@ -29,5 +29,5 @@ for index, keys in enumerate(DataLoader.keys):
 image = np.array(image)
 label = np.array(label)
 print(image.shape, label.shape)
-np.save('./crops/image.npy', image)
-np.save('./crops/label.npy', label)
+np.save('./data_make/image.npy', image)
+np.save('./data_make/label.npy', label)
