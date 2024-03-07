@@ -1,9 +1,9 @@
-from tactile import cropper, data_loader, tools
+from tactile import cropper, data_loader
 import numpy as np
 from tqdm import tqdm
 
 DataLoader = data_loader.DataLoader(
-    './230823_walkingData',
+    '../230823_walkingData',
     {
         'cyh': ['1', '2'],
         'ksh': ['1', '2'],
