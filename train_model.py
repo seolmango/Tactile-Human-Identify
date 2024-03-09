@@ -20,9 +20,8 @@ label_data = np.load('./data_make/label.npy')
 image_data = image_data.astype(np.float32)
 print("Data shape: ", image_data.shape)
 
-image_data = (image_data - np.min(image_data)) / (np.max(image_data) - np.min(image_data))
+image_data = (image_data - 1400) / 1000
 image_data = image_data.reshape(-1, 1, 25, 25)
-print("Complete Normalization")
 
 class CustomDataset(torch.utils.data.Dataset):
     def __init__(self, image, label):
