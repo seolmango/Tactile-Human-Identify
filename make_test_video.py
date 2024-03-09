@@ -44,6 +44,7 @@ for index, keys in enumerate(DataLoader.keys):
         image = np.array(Image.fromarray(image).resize((1920, 1080)))
         ax.clear()
         plt.close(fig)
+        plt.close('all')
         frames.append(image)
 
     output_file = f'./data_make/{keys}.mp4'
