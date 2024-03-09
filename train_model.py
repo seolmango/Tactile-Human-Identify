@@ -105,6 +105,8 @@ for epoch in range(epochs):
             valid_correct += predicted.eq(labels).sum().item()
 
     if valid_loss < best_loss:
+        # 모델 저장
+        torch.save(model.state_dict(), './data_make/model.pth')
         best_loss = valid_loss
         patience_check = 0
     else:
@@ -143,9 +145,6 @@ plt.legend()
 
 plt.tight_layout()
 plt.savefig('./data_make/loss_acc.png')
-
-# 모델 저장
-torch.save(model.state_dict(), './data_make/model.pth')
 
 predicted_label = []
 actual_label = []

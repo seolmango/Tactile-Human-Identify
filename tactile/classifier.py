@@ -9,6 +9,8 @@ class classifier():
         self.model.eval()
 
     def predict(self, data):
+        data = data.reshape(-1, 1, 25, 25)
+        data = (data - 1400) / 1000
         data = torch.from_numpy(data).float().to(self.device)
         with torch.no_grad():
             output = self.model(data)
