@@ -38,16 +38,13 @@ for index, keys in enumerate(DataLoader.keys):
         ax.set_title(f'{keys}_frame: {frame}')
         plt.imshow(now, cmap='gray')
         for loc, num in temp:
-            ax.add_patch(
-                patches.Rectangle(
-                    (loc[1] - 12, loc[0] - 12),
-                    25,
-                    25,
-                    linewidth=2,
-                    edgecolor='yellow',
-                    fill=False
-            ))
-            ax.text(loc[1], loc[0]-30, label[num], fontsize=16, color='yellow')
+            center_x = loc[0] + (15 - 1) // 2
+            center_y = loc[1] + (15 - 1) // 2
+            center_x = min(max(center_x, (25 - 1) // 2), 64 - (25 + 1) // 2)
+            center_y = min(max(center_y, (25-1) // 2), 64 - (25+1) // 2)
+            rect = patches.Rectangle((center_x-12, center_y-12), 25, 25, linewidth=1, edgecolor='r', facecolor='none')
+            ax.add_patch(rect)
+            ax.text(center_x-12, center_y-20, label[num], fontsize=12, color='r')
         fig.canvas.draw()
         image = np.array(fig.canvas.buffer_rgba())
         image = np.array(Image.fromarray(image).resize((1920, 1080)))
