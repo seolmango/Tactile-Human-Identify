@@ -169,7 +169,7 @@ plt.cla()
 plt.clf()
 
 plt.figure(figsize=(8, 6))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=class_labels, yticklabels=class_labels)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels_class, yticklabels=class_labels)
 plt.xlabel('Predicted Labels')
 plt.ylabel('Actual Labels')
 plt.title('Confusion Matrix')
