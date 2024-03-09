@@ -4,7 +4,7 @@ Tactile 센서를 통해 입력되는 압력 데이터에서 발만 잘라내기
 import numpy as np
 from tactile.tools import image_watchmap, generate_center_increasing_array
 
-class foot_cropper:
+class Foot_cropper:
     def __init__(self, input_x, input_y, crop_x, crop_y, filter_x, filter_y, threshold):
         """
         :param input_x: 입력 데이터의 x 길이

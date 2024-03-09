@@ -10,7 +10,7 @@ DataLoader = data_loader.DataLoader(
         'sch': ['1', '2']
     }
 )
-Cropper = cropper.foot_cropper(
+Cropper = cropper.Foot_cropper(
     64, 64, 25, 25, 15, 15, 100
 )
 
