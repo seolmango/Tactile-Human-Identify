@@ -4,6 +4,8 @@ from torch import nn, optim
 from tactile.model import CustomModel
 from torch.utils.data import DataLoader, DataLoader, random_split
 import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 torch.manual_seed(777)
@@ -145,3 +147,31 @@ plt.savefig('./data_make/loss_acc.png')
 
 # 모델 저장
 torch.save(model.state_dict(), './data_make/model.pth')
+
+predicted_label = []
+actual_label = []
+model.eval()
+
+for i, (inputs, labels) in enumerate(test_loader):
+    inputs = inputs.to(device)
+    labels = labels.to(device)
+
+    outputs = model(inputs)
+    _, predicted = outputs.max(1)
+
+    predicted_label.extend(predicted.tolist())
+    actual_label.extend(labels.tolist())
+
+cm = confusion_matrix(actual_label, predicted_label)
+labels_class = ['CYH', 'KSH', 'SCH']
+
+plt.cla()
+plt.clf()
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=class_labels, yticklabels=class_labels)
+plt.xlabel('Predicted Labels')
+plt.ylabel('Actual Labels')
+plt.title('Confusion Matrix')
+
+plt.savefig('./data_make/confusion_matrix.png')
