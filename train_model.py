@@ -9,6 +9,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 torch.manual_seed(777)
 if device == 'cuda':
     torch.cuda.manual_seed_all(777)
+print('Device: ', device)
 
 # 데이터
 image_data = np.load('./data_make/image.npy')
@@ -59,6 +60,9 @@ train_accurs = []
 valid_accurs = []
 
 epochs = 100
+best_loss = 10 ** 9
+patience_limit = 5
+patience_check = 0
 for epoch in range(epochs):
     model.train()
 
@@ -99,6 +103,14 @@ for epoch in range(epochs):
             valid_total += labels.size(0)
             valid_correct += predicted.eq(labels).sum().item()
 
+    if valid_loss < best_loss:
+        best_loss = valid_loss
+        patience_check = 0
+    else:
+        patience_check += 1
+        if patience_check > patience_limit:
+            print("Early Stopping")
+            break
     train_accuracy = 100 * train_correct / train_total
     valid_accuracy = 100 * valid_correct / valid_total
     train_loss_avg = train_loss / len(train_loader)
