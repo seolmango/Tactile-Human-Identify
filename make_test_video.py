@@ -29,7 +29,7 @@ for index, keys in enumerate(DataLoader.keys):
         images = Cropper.crop_image(now, loc)
         temp = []
         for count, img in enumerate(images):
-            temp.append((loc[count], Classifier.predict(img)))
+            temp.append(((loc[0][count], loc[1][count]), Classifier.predict(img)))
         plt.cla()
         plt.figure(figsize=(16, 9))
         fig = plt.figure()
