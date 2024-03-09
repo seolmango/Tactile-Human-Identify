@@ -66,7 +66,7 @@ class foot_cropper:
         for i in range(0, len(x)):
             center_x = x[i] + (self.filter_x - 1) // 2
             center_y = y[i] + (self.filter_y - 1) // 2
-            center_x = min(max(center_x, (self.crop_x-1) // 2), self.input_x - (self.crop_x-1) // 2)
-            center_y = min(max(center_y, (self.crop_y-1) // 2), self.input_y - (self.crop_y-1) // 2)
+            center_x = min(max(center_x, (self.crop_x-1) // 2), self.input_x - (self.crop_x+1) // 2)
+            center_y = min(max(center_y, (self.crop_y-1) // 2), self.input_y - (self.crop_y+1) // 2)
             images.append(frame[center_x - (self.crop_x-1) // 2:center_x + (self.crop_x+1) // 2, center_y - (self.crop_y-1) // 2:center_y + (self.crop_y+1) // 2])
         return np.array(images)
