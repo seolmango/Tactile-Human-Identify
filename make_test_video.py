@@ -4,6 +4,7 @@ from tactile.cropper import Foot_cropper
 import numpy as np
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 import imageio
 from PIL import Image
 
@@ -34,11 +35,19 @@ for index, keys in enumerate(DataLoader.keys):
         plt.figure(figsize=(16, 9))
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        ax.set_aspect('equal')
         ax.set_title(f'{keys}_frame: {frame}')
         plt.imshow(now, cmap='gray')
-        for loc, label in temp:
-            ax.text(loc[1], loc[0], label, fontsize=8, color='red')
+        for loc, num in temp:
+            ax.add_patch(
+                patches.Rectangle(
+                    (loc[1] - 12, loc[0] - 12),
+                    25,
+                    25,
+                    linewidth=2,
+                    edgecolor='yellow',
+                    fill=False
+            ))
+            ax.text(loc[1], loc[0]-30, label[num], fontsize=16, color='yellow')
         fig.canvas.draw()
         image = np.array(fig.canvas.buffer_rgba())
         image = np.array(Image.fromarray(image).resize((1920, 1080)))
@@ -48,7 +57,7 @@ for index, keys in enumerate(DataLoader.keys):
         frames.append(image)
 
     output_file = f'./data_make/{keys}.mp4'
-    writer = imageio.get_writer(output_file, fps=30, macro_block_size=None, format='MP4')
+    writer = imageio.get_writer(output_file, fps=5, macro_block_size=None, format='MP4')
     for frame in frames:
         writer.append_data(frame)
     writer.close()
