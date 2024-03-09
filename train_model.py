@@ -11,8 +11,8 @@ if device == 'cuda':
     torch.cuda.manual_seed_all(777)
 
 # 데이터
-image_data = np.load('.\data_make\image.npy')
-label_data = np.load('.\data_make\label.npy')
+image_data = np.load('./data_make/image.npy')
+label_data = np.load('./data_make/label.npy')
 
 image_data = image_data.astype(np.float32)
 print("Data shape: ", image_data.shape)
@@ -129,7 +129,7 @@ plt.ylabel('Accuracy')
 plt.legend()
 
 plt.tight_layout()
-plt.show()
+plt.savefig('./data_make/loss_acc.png')
 
 # 모델 저장
-torch.save(model.state_dict(), '.\data_make\model.pth')
+torch.save(model.state_dict(), './data_make/model.pth')
