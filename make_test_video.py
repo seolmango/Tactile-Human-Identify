@@ -42,7 +42,7 @@ for index, keys in enumerate(DataLoader.keys):
             center_y = loc[1] + (15 - 1) // 2
             center_x = min(max(center_x, (25 - 1) // 2), 64 - (25 + 1) // 2)
             center_y = min(max(center_y, (25-1) // 2), 64 - (25+1) // 2)
-            rect = patches.Rectangle((center_x-12, center_y-12), 25, 25, linewidth=1, edgecolor='r', facecolor='none')
+            rect = patches.Rectangle((center_y-12, center_x-12), 25, 25, linewidth=1, edgecolor='r', facecolor='none')
             ax.add_patch(rect)
             ax.text(center_x-12, center_y-20, label[num], fontsize=12, color='r')
         fig.canvas.draw()
