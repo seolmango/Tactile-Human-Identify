@@ -8,7 +8,9 @@ from tactile.tools import save_data_visualization
 DataLoader = DataLoader(
     '230823_walkingData',
     {
-        'sch': ['1']
+        'cyh': ['1','2'],
+        'ksh': ['1','2'],
+        'sch': ['1','2']
     }
 )
 
@@ -28,9 +30,9 @@ for index, keys in enumerate(DataLoader.keys):
         images = Cropper.crop_image(now, loc)
         for count, img in enumerate(images):
             result = Classifier.predict(img)
-            if result != 2:
-                wrong_images.append((img, result))
+            if result != index:
+                wrong_images.append((img, result, index))
 
 print(len(wrong_images))
-for i, (img, result) in enumerate(wrong_images):
-    save_data_visualization(img, f'{i}_{label[result]}.png', './wrong_images')
+for i, (img, result, real) in enumerate(wrong_images):
+    save_data_visualization(img, f'{i}_pre_{label[result]}_real_{label[real]}.png', './wrong_images')
