@@ -33,4 +33,4 @@ for index, keys in enumerate(DataLoader.keys):
 
 print(len(wrong_images))
 for i, (img, result) in enumerate(wrong_images):
-    save_data_visualization(img, f'./wrong_images/{i}_{label[result]}.png')
+    save_data_visualization(img, f'{i}_{label[result]}.png', './wrong_images')
