@@ -2,7 +2,7 @@ from tactile.data_loader import DataLoader
 from tactile.tools import image_watchmap, data_visualization
 
 DataLoader = DataLoader(
-    '230823_walkingData',
+    '../230823_walkingData',
     {
         'ksh': ['1']
     }

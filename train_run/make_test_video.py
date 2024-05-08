@@ -9,7 +9,7 @@ import imageio
 from PIL import Image
 
 DataLoader = DataLoader(
-    '230823_walkingData',
+    '../230823_walkingData',
     {
         'two': ['1']
     }
@@ -18,7 +18,7 @@ Cropper = Foot_cropper(
     64, 64, 25, 25, 15, 15, 100
 )
 
-Classifier = Classifier('./data_make/model.pth')
+Classifier = Classifier('../data_make/model.pth')
 
 label = ['cyh', 'ksh', 'sch']
 image = frames = []

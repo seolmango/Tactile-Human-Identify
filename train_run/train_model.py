@@ -14,8 +14,8 @@ if device == 'cuda':
 print('Device: ', device)
 
 # 데이터
-image_data = np.load('./data_make/image.npy')
-label_data = np.load('./data_make/label.npy')
+image_data = np.load('../data_make/image.npy')
+label_data = np.load('../data_make/label.npy')
 
 image_data = image_data.astype(np.float32)
 print("Data shape: ", image_data.shape)
@@ -106,7 +106,7 @@ for epoch in range(epochs):
 
     if valid_loss < best_loss:
         # 모델 저장
-        torch.save(model.state_dict(), './data_make/model.pth')
+        torch.save(model.state_dict(), '../data_make/model.pth')
         best_loss = valid_loss
         patience_check = 0
     else:

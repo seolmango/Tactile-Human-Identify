@@ -6,7 +6,7 @@ from tqdm import tqdm
 from tactile.tools import save_data_visualization
 
 DataLoader = DataLoader(
-    '230823_walkingData',
+    '../230823_walkingData',
     {
         'cyh': ['1','2'],
         'ksh': ['1','2'],
@@ -18,7 +18,7 @@ Cropper = Foot_cropper(
     64, 64, 25, 25, 15, 15, 100
 )
 
-Classifier = Classifier('./data_make/model.pth')
+Classifier = Classifier('../data_make/model.pth')
 
 label = ['cyh', 'ksh', 'sch']
 wrong_images = []
