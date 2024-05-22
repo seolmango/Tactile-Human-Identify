@@ -9,4 +9,9 @@ DataLoader = DataLoader(
 )
 
 image = DataLoader.get_data('test', 201)
-data_visualization(image, f"test")
+before_image = DataLoader.get_data('test', 200)
+watchmap = image_watchmap(image)
+before_watchmap = image_watchmap(before_image)
+data_visualization(watchmap, 'watchmap.png')
+data_visualization(before_watchmap, 'before_watchmap.png')
+data_visualization(watchmap * before_watchmap, 'multi_watchmap.png')

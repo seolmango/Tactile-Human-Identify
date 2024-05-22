@@ -56,7 +56,7 @@ def main():
     for i in range(max_frame):
         images = sensor.get()
         image = images[-1]
-        print(f"frame : {i+1}, sensor FPS : {sensor.fps}, images shape : {images.shape}")
+        print(f"frame : {i+1}, sensor FPS : {sensor.fps}, images shape : {images.shape}", flush=True)
         new_data.append(image)
         visualize(image)
     sensor.close()

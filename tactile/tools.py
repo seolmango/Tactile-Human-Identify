@@ -22,6 +22,8 @@ def data_visualization(data, title=''):
 
 def image_watchmap(data):
     data = make_ground_0(data)
+    # pre-processing
+    data = data / 1000
     watchmap = np.zeros(data.shape)
     for x in range(1, data.shape[0]-1):
         for y in range(1, data.shape[1]-1):
