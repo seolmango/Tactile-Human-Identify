@@ -33,7 +33,7 @@ def init_sensor():
     sensor = SensorEnv(
         # ports=["COM10", "COM12", 'COM8', 'COM11'],
         ports=["COM7"],
-        stack_num= 10, # was 20 / 2022.09.28
+        stack_num= 1, # was 20 / 2022.09.28
         adaptive_calibration= False,
         normalize=False
     )
@@ -44,10 +44,11 @@ def test_sensor():
     sensor = init_sensor()
     while True:
         images = sensor.get()
+        image = images[-1]
         image = (image - image.min()) / (image.max() - image.min())
-        if not visualize(images[-1]):
+        if not visualize(image):
             break
-        print(f"sensor FPS : {sensor.fps}")
+        print(f"sensor FPS : {sensor.fps}, images shape : {images.shape}")
     sensor.close()
 
 if __name__ == "__main__":
@@ -56,4 +57,3 @@ if __name__ == "__main__":
     # test_env()
     test_sensor()
     # test_model(save_log=True, log_dir=".\\logs")
-
