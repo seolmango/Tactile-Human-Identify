@@ -31,8 +31,8 @@ def visualize(image):
 def init_sensor():
     print("initializing sensors...")
     sensor = SensorEnv(
-        # ports=["COM10", "COM12", 'COM8', 'COM11'],
-        ports=["COM7"],
+        ports=["COM6", "COM5", 'COM8', 'COM7'],
+        #ports=["COM7"],
         stack_num= 1, # was 20 / 2022.09.28
         adaptive_calibration= False,
         normalize=False

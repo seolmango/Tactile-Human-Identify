@@ -3,15 +3,18 @@ import numpy as np
 from tqdm import tqdm
 
 DataLoader = data_loader.DataLoader(
-    '../230823_walkingData',
+    '../live_run',
     {
-        'cyh': ['1', '2'],
-        'ksh': ['1', '2'],
-        'sch': ['1', '2']
+        'alpha-sch': ['test1', 'test2'],
+        'alpha-ksh': ['test1', 'test2'],
+        'alpha-hym': ['test1'],
+        'alpha-ojj': ['test1'],
+        'alpha-pjj': ['test1'],
+        'alpha-rhs': ['test1'],
     }
 )
 Cropper = cropper.Foot_cropper(
-    64, 64, 25, 25, 15, 15, 100
+    32, 32, 25, 25, 15, 15, 100
 )
 
 image = []

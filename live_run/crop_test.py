@@ -4,7 +4,7 @@ import cv2
 from tactile import cropper
 
 Cropper = cropper.Foot_cropper(
-    32, 32, 25, 25, 15, 15, 50
+    32, 32, 25, 25, 15, 15, 100
 )
 
 def visualize(image):
@@ -37,7 +37,6 @@ def crop_test():
     while True:
         images = sensor.get()
         image = images[-1]
-        image = (image - image.min()) / (image.max() - image.min())
         loc = Cropper.crop(image, before)
         x, y = loc
         for i in range(0, len(x)):
@@ -45,10 +44,11 @@ def crop_test():
             center_y = y[i] + (15 - 1) // 2
             center_x = min(max(center_x, (25-1) // 2), 32 - (25+1) // 2)
             center_y = min(max(center_y, (25-1) // 2), 32 - (25+1) // 2)
-            cv2.rectangle(image, (center_y - 12, center_x - 12), (center_y + 13, center_x + 13), (255, 255, 255), 1)
+            cv2.rectangle(image, (center_y - 12, center_x - 12), (center_y + 13, center_x + 13), (255, 0, 0), 1)
         if not visualize(image):
             break
         print(f"sensor FPS : {sensor.fps}, images shape : {images.shape}")
+        before = image
     sensor.close()
 
 if __name__ == "__main__":

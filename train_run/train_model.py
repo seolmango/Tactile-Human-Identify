@@ -18,9 +18,9 @@ image_data = np.load('../data_make/image.npy')
 label_data = np.load('../data_make/label.npy')
 
 image_data = image_data.astype(np.float32)
+label_data = label_data.astype(np.int64)
+image_data = (image_data - np.min(image_data)) / (np.max(image_data) - np.min(image_data))
 print("Data shape: ", image_data.shape)
-
-image_data = (image_data - 1400) / 1000
 image_data = image_data.reshape(-1, 1, 25, 25)
 
 class CustomDataset(torch.utils.data.Dataset):
@@ -47,7 +47,7 @@ print("Train set: ", len(train_dataset))
 print("Validation set: ", len(valid_dataset))
 print("Test set: ", len(test_dataset))
 
-model = CustomModel(3).to(device)
+model = CustomModel(6).to(device)
 criterion = nn.CrossEntropyLoss().to(device)
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
@@ -144,7 +144,7 @@ plt.ylabel('Accuracy')
 plt.legend()
 
 plt.tight_layout()
-plt.savefig('./data_make/loss_acc.png')
+plt.savefig('../data_make/loss_acc.png')
 
 predicted_label = []
 actual_label = []
@@ -161,7 +161,7 @@ for i, (inputs, labels) in enumerate(test_loader):
     actual_label.extend(labels.tolist())
 
 cm = confusion_matrix(actual_label, predicted_label)
-labels_class = ['CYH', 'KSH', 'SCH']
+labels_class = ['alpha-sch', 'alpha-ksh', 'alpha-hym', 'alpha-ojj', 'alpha-pjj', 'alpha-rhs']
 
 plt.cla()
 plt.clf()
@@ -172,4 +172,4 @@ plt.xlabel('Predicted Labels')
 plt.ylabel('Actual Labels')
 plt.title('Confusion Matrix')
 
-plt.savefig('./data_make/confusion_matrix.png')
+plt.savefig('../data_make/confusion_matrix.png')

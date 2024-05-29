@@ -10,7 +10,7 @@ from PIL import Image
 DataLoader = DataLoader(
     '../live_run',
     {
-        'test': ['sch']
+        'test': ['sch-walk']
     }
 )
 Cropper = Foot_cropper(

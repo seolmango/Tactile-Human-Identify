@@ -133,18 +133,29 @@ class MultiSensors:
                 ========================================================================================================
                 '''
 
-                images[1] = cv2.rotate(images[1], cv2.ROTATE_90_CLOCKWISE)
-                images[1] = cv2.flip(images[1], 0)
+                #images[1] = cv2.rotate(images[1], cv2.ROTATE_90_CLOCKWISE)
+                #images[1] = cv2.flip(images[1], 0)
                 # # images[0] = cv2.rotate(images[0], cv2.ROTATE_90_COUNTERCLOCKWISE)
                 # images[2] = cv2.rotate(images[2], cv2.ROTATE_90_COUNTERCLOCKWISE)
                 # images[3] = cv2.rotate(images[3], cv2.ROTATE_90_CLOCKWISE)
                 # images[0] = cv2.rotate(images[0], cv2.ROTATE_90_CLOCKWISE)
                 # images[0] = cv2.rotate(images[0], cv2.ROTATE_90_CLOCKWISE)
-                images[0] = cv2.flip(images[0], 0)
+                #images[0] = cv2.flip(images[0], 0)
                 # # images[2] = cv2.flip(images[2], 0)
-                images[3] = cv2.flip(images[3], 0)
-                images[3] = cv2.flip(images[3], 1)
-
+                #images[3] = cv2.flip(images[3], 0)
+                #images[3] = cv2.flip(images[3], 1)
+                for i in range(4):
+                    images[i] = cv2.rotate(images[i], cv2.ROTATE_90_CLOCKWISE)
+                    images[i] = cv2.rotate(images[i], cv2.ROTATE_90_CLOCKWISE)
+                images[1] = cv2.rotate(images[1], cv2.ROTATE_90_CLOCKWISE)
+                images[0] = cv2.flip(images[0], 0)
+                images[2] = cv2.rotate(images[2], cv2.ROTATE_90_COUNTERCLOCKWISE)
+                images[3] = cv2.rotate(images[3], cv2.ROTATE_90_COUNTERCLOCKWISE)
+                real_base = min(np.min(images[0]), np.min(images[1]), np.min(images[2]), np.min(images[3]))
+                images[0] = (images[0]- np.min(images[0])) + real_base
+                images[1] = (images[1]- np.min(images[1])) + real_base
+                images[2] = (images[2]- np.min(images[2])) + real_base
+                images[3] = (images[3]- np.min(images[3])) + real_base
                 a = np.concatenate((images[0], images[1]))
                 b = np.concatenate((images[2], images[3]))
                 '''
