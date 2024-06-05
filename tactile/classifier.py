@@ -5,7 +5,7 @@ import numpy as np
 class Classifier():
     def __init__(self, state_path):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.model = CustomModel(6).to(self.device)
+        self.model = CustomModel(3).to(self.device)
         self.model.load_state_dict(torch.load(state_path))
         self.model.eval()
 
@@ -16,9 +16,4 @@ class Classifier():
         with torch.no_grad():
             output = self.model(data)
             _, predicted = torch.max(output, 1)
-            # if max value is too similar to each other, return 6
-            sorted_output = torch.sort(output, descending=True).values
-            if sorted_output[0][0] - sorted_output[0][1] < 3:
-                return 6
-            else:
-                return predicted.item()
+            return predicted.item()

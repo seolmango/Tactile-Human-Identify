@@ -47,7 +47,7 @@ print("Train set: ", len(train_dataset))
 print("Validation set: ", len(valid_dataset))
 print("Test set: ", len(test_dataset))
 
-model = CustomModel(6).to(device)
+model = CustomModel(3).to(device)
 criterion = nn.CrossEntropyLoss().to(device)
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
@@ -161,7 +161,7 @@ for i, (inputs, labels) in enumerate(test_loader):
     actual_label.extend(labels.tolist())
 
 cm = confusion_matrix(actual_label, predicted_label)
-labels_class = ['alpha-sch', 'alpha-ksh', 'alpha-hym', 'alpha-ojj', 'alpha-pjj', 'alpha-rhs']
+labels_class = ['sch', 'ksh']
 
 plt.cla()
 plt.clf()
