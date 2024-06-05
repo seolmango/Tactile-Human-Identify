@@ -5,12 +5,9 @@ from tqdm import tqdm
 DataLoader = data_loader.DataLoader(
     '../live_run',
     {
-        'alpha-sch': ['test1', 'test2'],
-        'alpha-ksh': ['test1', 'test2'],
-        'alpha-hym': ['test1'],
-        'alpha-ojj': ['test1'],
-        'alpha-pjj': ['test1'],
-        'alpha-rhs': ['test1'],
+        'sch': ['stop-left', 'stop-right'],
+        'ksh': ['stop-left', 'stop-right'],
+        'rsh': ['stop-left', 'stop-right'],
     }
 )
 Cropper = cropper.Foot_cropper(

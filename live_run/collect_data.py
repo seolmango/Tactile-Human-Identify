@@ -3,7 +3,14 @@ import numpy as np
 import cv2
 import os
 from serial.serialutil import SerialException
+from tactile.cropper import Foot_cropper
+from tactile.tools import live_visualize
+from tqdm import tqdm
 
+
+cropper = Foot_cropper(
+    32,32,25,25,15,15,100
+)
 def init_sensor():
     print("initializing sensors...")
     sensor = SensorEnv(
@@ -16,17 +23,6 @@ def init_sensor():
     print("sensor init finish")
     return sensor
 
-def visualize(image):
-    if image.dtype != np.uint8:
-        image *= 255
-        image[image < 0] = 0
-        image = image.astype(np.uint8)
-    image = cv2.resize(image, (500, 500))
-    cv2.imshow("Pressure", image)
-    if cv2.waitKey(1) & 0xff == 27:
-        return False
-    else:
-        return True
 
 def main():
     try:
@@ -41,27 +37,22 @@ def main():
         os.mkdir(data_label)
     path = path + data_label + "/"
     data_name = str(input("Enter the name for the data> "))
-    file_list = os.listdir(path)
-    if f"{data_name}.npy" in file_list:
-        print("The file already exists.")
-        if str(input("Do you want to add data to the file? (y/n)> ")) == "n":
-            print("The program is terminated.")
-            return
-        else:
-            before_data = np.load(f"{path}{data_name}.npy")
-    else:
-        before_data = []
     max_frame = int(input("Enter the number of frames to collect> "))
     new_data = []
-    for i in range(max_frame):
+    before = None
+    for i in tqdm(range(max_frame)):
         images = sensor.get()
         image = images[-1]
-        print(f"frame : {i+1}, sensor FPS : {sensor.fps}, images shape : {images.shape}", flush=True)
+        if before is not None:
+            loc = cropper.crop(image, before)
+            before = image
+        else:
+            before = image
+            loc = [[], []]
         new_data.append(image)
-        visualize(image)
+        live_visualize(image, loc=loc)
     sensor.close()
-    before_data.extend(new_data)
-    np.save(f"{path}{data_name}.npy", before_data)
+    np.save(f"{path}{data_name}.npy", new_data)
     print(f"Data saved. file path : {path}{data_name}.npy")
 
 
