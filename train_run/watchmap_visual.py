@@ -4,9 +4,11 @@ from tactile.tools import image_watchmap, data_visualization
 DataLoader = DataLoader(
     '../live_run',
     {
-        'test': ['sch']
+        'alpha-hym': ['test1']
     }
 )
+
+print(DataLoader.get_data_length('alpha-hym'))
 
 image = DataLoader.get_data('test', 201)
 before_image = DataLoader.get_data('test', 200)
